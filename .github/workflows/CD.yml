@@ -1,7 +1,7 @@
 env:
   repo:         "https://github.com/farrukh90/artemis.git"
   app_version:  "2.0.0"
-  project_id:   "csubrsnzorjkvdca"
+  project_id:   "terraform-project-kanya"
   repo_region:  "us-central1"
   app_name:     "artemis"
 
@@ -68,11 +68,11 @@ jobs:
 
 
 
-      - name: Authenticate to Google account
-        run: |
-          gcloud auth activate-service-account --key-file="service-account.json"
-          gcloud config set project ${{ env.project_id }}
-
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.SERVICE_ACCOUNT }}'
 
 
       - name: Authenticate to repository
